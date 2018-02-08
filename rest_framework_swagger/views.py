@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from . import renderers
 
 
-def get_swagger_view(title=None, url=None, patterns=None, urlconf=None):
+def get_swagger_view(title=None, url=None, patterns=None, urlconf=None, permission_classes=None):
     """
     Returns schema view which renders Swagger/OpenAPI.
     """
@@ -38,4 +38,8 @@ def get_swagger_view(title=None, url=None, patterns=None, urlconf=None):
 
             return Response(schema)
 
+    if permission_classes:
+        SwaggerSchemaView.permission_classes = permission_classes
+
     return SwaggerSchemaView.as_view()
+
